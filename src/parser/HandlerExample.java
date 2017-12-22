@@ -15,6 +15,8 @@ public class HandlerExample implements ContentHandler {
     private String caracteristiqueCourante;
     private double inf;
     private double sup;
+    private Set<String> ensemble = new TreeSet<String>();
+    private String ensembleCourant;
 
     public HandlerExample() {
     }
@@ -36,7 +38,7 @@ public class HandlerExample implements ContentHandler {
     public void startElement(String namespaceURI, String localName, String rawName, Attributes atts) throws SAXException {
         elementType = localName;
         if (localName.equals("categorie")) {
-            System.out.println("New catagorie:");
+            System.out.println("New categorie:");
         } else {
             if (localName.equals("caracteristique")) {
                 System.out.print("\tnew caracteristique: ");
@@ -51,10 +53,16 @@ public class HandlerExample implements ContentHandler {
         } else {
             if (localName.equals("caracteristique")) {
                 System.out.println("\tend caracteristique: " + this.caracteristiqueCourante + ".");
+                ensemble=new TreeSet<String>();
 
             } else {
                 if (localName.equals("categorie")) {
                     System.out.println("end catagorie.\n");
+                }
+                else {
+                	if(localName.equals("ensemble")) {
+                		System.out.println("\t\tensemble: " + ensemble);
+                	}
                 }
                 elementType = null; // fin traitement de contenu
             }
@@ -85,7 +93,11 @@ public class HandlerExample implements ContentHandler {
                             } else {
                                 if (elementType.equals("sup")) {
                                     sup = Double.parseDouble(contenu);
-                                }
+                                } else {
+                                	if (elementType.equals("element")) {
+                                		ensemble.add(contenu);
+                                	}
+                                } 
                             }
                         }
                     }
