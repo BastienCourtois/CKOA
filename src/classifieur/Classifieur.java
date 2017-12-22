@@ -19,7 +19,6 @@ public class Classifieur {
 	
 	//MÃ©thodes
 	public boolean englobe(Categorie englobé, Categorie englobante) { 
-		int i;
 		return englobante.englobe(englobé);
 	}
 	
