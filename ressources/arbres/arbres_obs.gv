@@ -1,0 +1,12 @@
+digraph G {
+node [color = green]; arbre conifere feuillu thuya ;
+node [color = black]; 
+arbre-> conifere
+conifere-> epicea
+conifere-> meleze
+conifere-> thuya
+arbre-> feuillu
+feuillu-> aulne
+feuillu-> chene
+feuillu-> hetre
+}

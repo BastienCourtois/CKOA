@@ -51,7 +51,7 @@ public class ClassifieurTest {
 		categ = new Categorie("arbre", carac);
 
 		// Création du classifieur
-		classi = new Classifieur("arbre", categ);
+		classi = new Classifieur(categ);
 
 		// Création des caracteristiques de la sous-categorie conifere
 		HashMap<String, Domaine> carac2 = new HashMap<String, Domaine>();
@@ -130,7 +130,7 @@ public class ClassifieurTest {
 		ArrayList<Categorie> liste = new ArrayList<Categorie>();
 		liste.add(categ);
 		liste.add(categ2);
-		ArrayList<Categorie> liste2 = classi.toutes_categ(obs, categ) ;
+		ArrayList<Categorie> liste2 = classi.toutes_categ(obs) ;
 		Assert.assertEquals(liste, liste2);
 	}
 
