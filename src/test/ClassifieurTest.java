@@ -29,18 +29,18 @@ public class ClassifieurTest {
 		symb.add("arrondi");
 		symb.add("conique");
 		symb.add("irregulier");
-		EnsembleDeChaine ens = new EnsembleDeChaine(symb);
+		EnsembleDeChaine ens = new EnsembleDeChaine("forme", symb);
 
-		IntervalleNumerique inter = new IntervalleNumerique(0.2, 3.0);
+		IntervalleNumerique inter = new IntervalleNumerique("taille du tronc", 0.2, 3.0);
 
 		ArrayList<String> symb2 = new ArrayList<String>();
 		symb2.add("ecailles");
 		symb2.add("fissuree");
 		symb2.add("lisse");
 		symb2.add("plaques");
-		EnsembleDeChaine ens2 = new EnsembleDeChaine(symb2);
+		EnsembleDeChaine ens2 = new EnsembleDeChaine("ecorce", symb2);
 
-		IntervalleNumerique inter2 = new IntervalleNumerique(5.0, 50.0);
+		IntervalleNumerique inter2 = new IntervalleNumerique("taille", 5.0, 50.0);
 
 		carac.put("forme", ens);
 		carac.put("taille du tronc", inter);
@@ -58,17 +58,17 @@ public class ClassifieurTest {
 
 		ArrayList<String> symb3 = new ArrayList<String>();
 		symb3.add("conique");
-		EnsembleDeChaine ens3 = new EnsembleDeChaine(symb3);
+		EnsembleDeChaine ens3 = new EnsembleDeChaine("forme", symb3);
 
-		IntervalleNumerique inter3 = new IntervalleNumerique(0.5, 2.0);
+		IntervalleNumerique inter3 = new IntervalleNumerique("taille du tronc", 0.5, 2.0);
 
 		ArrayList<String> symb4 = new ArrayList<String>();
 		symb4.add("ecailles");
 		symb4.add("fissuree");
 		symb4.add("lisse");
-		EnsembleDeChaine ens4 = new EnsembleDeChaine(symb4);
+		EnsembleDeChaine ens4 = new EnsembleDeChaine("ecorce", symb4);
 
-		IntervalleNumerique inter4 = new IntervalleNumerique(5.0, 40.0);
+		IntervalleNumerique inter4 = new IntervalleNumerique("taille", 5.0, 40.0);
 
 		carac2.put("forme", ens3);
 		carac2.put("taille du tronc", inter3);
@@ -91,17 +91,17 @@ public class ClassifieurTest {
 
 		ArrayList<String> symb = new ArrayList<String>();
 		symb.add("marchepas");
-		EnsembleDeChaine ens = new EnsembleDeChaine(symb);
+		EnsembleDeChaine ens = new EnsembleDeChaine("forme",symb);
 
-		IntervalleNumerique inter3 = new IntervalleNumerique(0.5, 2.0);
+		IntervalleNumerique inter3 = new IntervalleNumerique("taille du tronc", 0.5, 2.0);
 
 		ArrayList<String> symb4 = new ArrayList<String>();
 		symb4.add("ecailles");
 		symb4.add("fissuree");
 		symb4.add("lisse");
-		EnsembleDeChaine ens4 = new EnsembleDeChaine(symb4);
+		EnsembleDeChaine ens4 = new EnsembleDeChaine("ecorce", symb4);
 
-		IntervalleNumerique inter4 = new IntervalleNumerique(5.0, 40.0);
+		IntervalleNumerique inter4 = new IntervalleNumerique("taille", 5.0, 40.0);
 
 		carac.put("forme", ens);
 		carac.put("taille du tronc", inter3);

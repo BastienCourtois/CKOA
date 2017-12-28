@@ -19,7 +19,7 @@ public class EnsembleDeChainesTest {
 		liste.add("PLP");
 		liste.add("AC");
 		liste.add("LC");
-		ens = new EnsembleDeChaine(liste);
+		ens = new EnsembleDeChaine("fils", liste);
 	}
 	
 	@Test
@@ -38,7 +38,7 @@ public class EnsembleDeChainesTest {
 		liste2.add("PLP");
 		liste2.add("AC");
 		liste2.add("LC");
-		EnsembleDeChaine ens2 = new EnsembleDeChaine(liste2);
+		EnsembleDeChaine ens2 = new EnsembleDeChaine("fils2", liste2);
 		Assert.assertTrue(ens.inclus(ens2));
 	}
 	
@@ -48,7 +48,7 @@ public class EnsembleDeChainesTest {
 		liste2.add("PLP");
 		liste2.add("AC");
 		liste2.add("BC");
-		EnsembleDeChaine ens2 = new EnsembleDeChaine(liste2);
+		EnsembleDeChaine ens2 = new EnsembleDeChaine("fils2", liste2);
 		Assert.assertTrue(!ens.inclus(ens2));
 	}
 	
@@ -59,7 +59,7 @@ public class EnsembleDeChainesTest {
 		liste2.add("AC");
 		liste2.add("BC");
 		liste2.add("LC");
-		EnsembleDeChaine ens2 = new EnsembleDeChaine(liste2);
+		EnsembleDeChaine ens2 = new EnsembleDeChaine("fils2", liste2);
 		Assert.assertTrue(ens.inclus(ens2));
 	}
 	
@@ -68,7 +68,7 @@ public class EnsembleDeChainesTest {
 		ArrayList<String> liste2 = new ArrayList<String>();
 		liste2.add("PLP");
 		liste2.add("AC");
-		EnsembleDeChaine ens2 = new EnsembleDeChaine(liste2);
+		EnsembleDeChaine ens2 = new EnsembleDeChaine("fils2", liste2);
 		Assert.assertTrue(!ens.inclus(ens2));
 	}
 	
@@ -79,7 +79,7 @@ public class EnsembleDeChainesTest {
 	
 	@Test
 	public void test_isEnsembleDeChaine_2() {
-		IntervalleNumerique inte = new IntervalleNumerique(10,100);
+		IntervalleNumerique inte = new IntervalleNumerique("intervalle", 10,100);
 		Assert.assertTrue(!inte.isEnsembleDeChaine());
 	}
 	

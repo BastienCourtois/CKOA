@@ -6,7 +6,8 @@ public class EnsembleDeChaine extends Domaine{
 	private ArrayList<String> symboles;
 	
 	//Constructeur
-	public EnsembleDeChaine(ArrayList<String> liste){
+	public EnsembleDeChaine(String nnom, ArrayList<String> liste){
+		this.nom=nnom;
 		symboles = liste;
 	}
 	
@@ -28,6 +29,6 @@ public class EnsembleDeChaine extends Domaine{
 	}
 	
 	public String toString(){
-		return super.toString() + "Ensemble: " + symboles.toString();
+		return super.toString() + symboles.toString();
 	}
 }

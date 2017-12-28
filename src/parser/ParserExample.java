@@ -1,8 +1,17 @@
 package parser;
 
-import java.io.*;
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
+
+import classifieur.Categorie;
+import classifieur.Domaine;
 
 /**
  *
@@ -23,13 +32,21 @@ public class ParserExample {
             InputSource input = new InputSource(new FileInputStream(argv[0] + ".xml"));
 
             // Creation et connexion du ContentHandler specifique
-            HandlerExample monHandler = new HandlerExample();
+            HandlerPerso monHandler = new HandlerPerso();
             reader.setContentHandler(monHandler);
             // Lancement du traitement...
             reader.parse(input);
 
             // recuperation de donnees
             System.out.println("Categories: " + monHandler.getCategories());
+            
+            //recuperation du classifieur(donc simple catégorie mere et de toutes les sous catégories non triées
+            System.out.println("\n\n\n\nClassifieur : " + monHandler.getClassifieur());
+            System.out.println("\nSous-Categs : ");
+            HashMap<String, Categorie> categs=monHandler.getCategs();
+            for (Map.Entry<String, Categorie> fille : categs.entrySet()) {
+            	System.out.println("\n" + fille);
+            }
         }
     }
 }

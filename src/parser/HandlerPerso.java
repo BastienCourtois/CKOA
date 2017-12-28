@@ -3,22 +3,40 @@ package parser;
 import java.util.*;
 import org.xml.sax.*;
 
+import classifieur.*;
+
 /**
  *
  * @author carre
  */
-public class HandlerExample implements ContentHandler {
+public class HandlerPerso implements ContentHandler {
 
+	//Variables du projet
+	private Classifieur classifieur;
+	private Categorie categCourante;
+	private HashMap<String, Domaine> mapCarac;//caractéristiques de la catégorie courante
+	private HashMap<String, Categorie> mapCategorie;//liste des catégories filles non triées
+	private boolean mere;//définit si la catégorie courante est la mère afin de créer le classifieur dès que la mere est identifiée
+	private String nomMere;//nom de la mère de la catégorie courante
+	
+	public Classifieur getClassifieur() {
+		return classifieur;
+	}
+	public HashMap<String, Categorie> getCategs(){
+		return mapCategorie;
+	}
+	//
+	
+	
     private String elementType;
     private Set<String> categories = new TreeSet<String>();
     private String categorieCourante;
     private String caracteristiqueCourante;
     private double inf;
     private double sup;
-    private Set<String> ensemble = new TreeSet<String>();
-    private String ensembleCourant;
+    private ArrayList<String> ensemble = new ArrayList<String>();
 
-    public HandlerExample() {
+    public HandlerPerso() {
     }
 
     public Set<String> getCategories() {
@@ -28,6 +46,7 @@ public class HandlerExample implements ContentHandler {
     // trace du document
     public void startDocument() throws SAXException {
         System.out.println("Start document...\n");
+        mapCategorie = new HashMap<String, Categorie>();
     }
 
     public void endDocument() throws SAXException {
@@ -39,6 +58,7 @@ public class HandlerExample implements ContentHandler {
         elementType = localName;
         if (localName.equals("categorie")) {
             System.out.println("New categorie:");
+            mapCarac = new HashMap<String, Domaine>();
         } else {
             if (localName.equals("caracteristique")) {
                 System.out.print("\tnew caracteristique: ");
@@ -50,18 +70,29 @@ public class HandlerExample implements ContentHandler {
     public void endElement(String namespaceURI, String localName, String rawName) throws SAXException {
         if (localName.equals("intervalle")) {
             System.out.println("\t\tintervalle: [" + inf + ", " + sup + "]");
+            mapCarac.put(caracteristiqueCourante, new IntervalleNumerique("intervalle", inf, sup));
         } else {
             if (localName.equals("caracteristique")) {
                 System.out.println("\tend caracteristique: " + this.caracteristiqueCourante + ".");
-                ensemble=new TreeSet<String>();
+                mapCarac.put(caracteristiqueCourante, new EnsembleDeChaine(caracteristiqueCourante, ensemble));
+                ensemble=new ArrayList<String>();
 
             } else {
                 if (localName.equals("categorie")) {
                     System.out.println("end categorie.\n");
+                    if(mere) {
+                    	classifieur = new Classifieur(new Categorie(categorieCourante, mapCarac));
+                    	mere=false;
+                    }
+                    else {
+                    	categCourante = new Categorie(categorieCourante, mapCarac);
+                    	mapCategorie.put(categorieCourante, categCourante);
+                    }
                 }
                 else {
                 	if(localName.equals("ensemble")) {
                 		System.out.println("\t\tensemble: " + ensemble);
+                		mapCarac.put(caracteristiqueCourante, new EnsembleDeChaine(caracteristiqueCourante, ensemble));
                 	}
                 }
                 elementType = null; // fin traitement de contenu
@@ -83,6 +114,9 @@ public class HandlerExample implements ContentHandler {
                 } else {
                     if (elementType.equals("mere")) {
                         System.out.println("categorie mere: " + contenu);
+                        if(contenu.equalsIgnoreCase("TOP"))
+                        	mere=true;
+                        nomMere=contenu;
                     } else {
                         if (elementType.equals("intitule")) {
                             System.out.println("" + contenu);
@@ -105,8 +139,8 @@ public class HandlerExample implements ContentHandler {
             }
         }
     }
-
-
+    
+    
 // NOP
     public void startPrefixMapping(String prefix, String uri) {
     }

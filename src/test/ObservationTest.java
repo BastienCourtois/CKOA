@@ -36,18 +36,18 @@ public class ObservationTest {
 		symb.add("arrondi");
 		symb.add("conique");
 		symb.add("irregulier");
-		EnsembleDeChaine ens = new EnsembleDeChaine(symb);
+		EnsembleDeChaine ens = new EnsembleDeChaine("forme", symb);
 
-		IntervalleNumerique inter = new IntervalleNumerique(0.2, 3.0);
+		IntervalleNumerique inter = new IntervalleNumerique("taille du tronc", 0.2, 3.0);
 
 		ArrayList<String> symb2 = new ArrayList<String>();
 		symb2.add("ecailles");
 		symb2.add("fissuree");
 		symb2.add("lisse");
 		symb2.add("plaques");
-		EnsembleDeChaine ens2 = new EnsembleDeChaine(symb2);
+		EnsembleDeChaine ens2 = new EnsembleDeChaine("ecorce", symb2);
 
-		IntervalleNumerique inter2 = new IntervalleNumerique(5.0, 50.0);
+		IntervalleNumerique inter2 = new IntervalleNumerique("taille", 5.0, 50.0);
 
 		carac.put("forme", ens);
 		carac.put("taille du tronc", inter);

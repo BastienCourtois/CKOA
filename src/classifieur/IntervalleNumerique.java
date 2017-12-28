@@ -4,7 +4,8 @@ public class IntervalleNumerique extends Domaine {
 	private double sup; //Borne supérieure de l'intervalle.
 	
 	//Constructeur
-	public IntervalleNumerique(double i, double s){
+	public IntervalleNumerique(String nnom, double i, double s){
+		this.nom=nnom;
 		if(i < s){
 			this.inf = i;
 			this.sup = s;
@@ -33,6 +34,6 @@ public class IntervalleNumerique extends Domaine {
 	}
 	
 	public String toString(){
-		return super.toString() + "Intervalle: [" + this.inf + ", " + this.sup + "]";
+		return super.toString() + "[" + this.inf + ", " + this.sup + "]";
 	}
 }

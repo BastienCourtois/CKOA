@@ -15,7 +15,7 @@ public class IntervalleNumeriqueTest {
 	
 	@Before
 	public void setUp(){
-		inte = new IntervalleNumerique(10,100);
+		inte = new IntervalleNumerique("intervalle", 10,100);
 	}
 	
 	@Test
@@ -45,25 +45,25 @@ public class IntervalleNumeriqueTest {
 	
 	@Test
 	public void test_inclus_1(){
-        IntervalleNumerique inte2 = new IntervalleNumerique(9,101);
+        IntervalleNumerique inte2 = new IntervalleNumerique("intervalle", 9,101);
         Assert.assertTrue(inte.inclus(inte2));
 	}
 	
     @Test
 	public void test_inclus_2(){
-        IntervalleNumerique inte2 = new IntervalleNumerique(9,99);
+        IntervalleNumerique inte2 = new IntervalleNumerique("intervalle", 9,99);
         Assert.assertTrue(!inte.inclus(inte2));
 	}
 	
     @Test
 	public void test_inclus_3(){
-        IntervalleNumerique inte2 = new IntervalleNumerique(11,101);
+        IntervalleNumerique inte2 = new IntervalleNumerique("intervalle", 11,101);
         Assert.assertTrue(!inte.inclus(inte2));
 	}
 
 	@Test
 	public void test_inclus_4(){
-        IntervalleNumerique inte2 = new IntervalleNumerique(11,99);
+        IntervalleNumerique inte2 = new IntervalleNumerique("intervalle", 11,99);
         Assert.assertTrue(!inte.inclus(inte2));
 	}
 	
@@ -77,7 +77,7 @@ public class IntervalleNumeriqueTest {
 		ArrayList<String> liste2 = new ArrayList<String>();
 		liste2.add("PLP");
 		liste2.add("AC");
-		EnsembleDeChaine ens = new EnsembleDeChaine(liste2);
+		EnsembleDeChaine ens = new EnsembleDeChaine("ensemble", liste2);
         Assert.assertTrue(!ens.isIntervalleNumerique());
 	}
 	

@@ -2,7 +2,7 @@ package classifieur;
 
 public abstract class Domaine {
 	//Attribut
-	private String nom;
+	protected String nom;
 	
 	//Méthodes
 	public abstract boolean inclus(Domaine englobant);
