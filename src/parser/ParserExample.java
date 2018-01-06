@@ -42,11 +42,6 @@ public class ParserExample {
             
             //recuperation du classifieur(donc simple catégorie mere et de toutes les sous catégories non triées
             System.out.println("\n\n\n\nClassifieur : " + monHandler.getClassifieur());
-            System.out.println("\nSous-Categs : ");
-            HashMap<String, Categorie> categs=monHandler.getCategs();
-            for (Map.Entry<String, Categorie> fille : categs.entrySet()) {
-            	System.out.println("\n" + fille);
-            }
         }
     }
 }

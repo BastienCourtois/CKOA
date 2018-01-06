@@ -15,15 +15,11 @@ public class HandlerPerso implements ContentHandler {
 	private Classifieur classifieur;
 	private Categorie categCourante;
 	private HashMap<String, Domaine> mapCarac;//caractéristiques de la catégorie courante
-	private HashMap<String, Categorie> mapCategorie;//liste des catégories filles non triées
 	private boolean mere;//définit si la catégorie courante est la mère afin de créer le classifieur dès que la mere est identifiée
 	private String nomMere;//nom de la mère de la catégorie courante
 	
 	public Classifieur getClassifieur() {
 		return classifieur;
-	}
-	public HashMap<String, Categorie> getCategs(){
-		return mapCategorie;
 	}
 	//
 	
@@ -46,7 +42,6 @@ public class HandlerPerso implements ContentHandler {
     // trace du document
     public void startDocument() throws SAXException {
         System.out.println("Start document...\n");
-        mapCategorie = new HashMap<String, Categorie>();
     }
 
     public void endDocument() throws SAXException {
@@ -86,7 +81,7 @@ public class HandlerPerso implements ContentHandler {
                     }
                     else {
                     	categCourante = new Categorie(categorieCourante, mapCarac);
-                    	mapCategorie.put(categorieCourante, categCourante);
+                    	ajoutCategorieAuClassifieur(classifieur.getTypologie(), categCourante);
                     }
                 }
                 else {
@@ -158,5 +153,23 @@ public class HandlerPerso implements ContentHandler {
     }
 
     public void setDocumentLocator(Locator arg0) {
+    }
+    
+    public boolean ajoutCategorieAuClassifieur(Categorie typo, Categorie categ) {
+    	if(typo.getNom().equalsIgnoreCase(nomMere)) {
+    		this.getClassifieur().ajout_sous_categ(typo, categorieCourante, categ);
+    		return true;
+    	}
+    	for (Map.Entry<String, Categorie> fille : typo.getFilles().entrySet()) {
+    		System.out.println(nomMere);
+    		if(fille.getValue().getNom().equalsIgnoreCase(nomMere)) {
+    			this.getClassifieur().ajout_sous_categ(fille.getValue(), categorieCourante, categ);
+    			return true;
+    		}
+    		else {
+    			ajoutCategorieAuClassifieur(fille.getValue(), categ);
+    		}
+    	}
+    	return true;
     }
 }

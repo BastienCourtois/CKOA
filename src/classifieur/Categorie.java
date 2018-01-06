@@ -17,6 +17,10 @@ public class Categorie {
 	}
 
 	// Accesseurs
+	public String getNom() {
+		return this.nom;
+	}
+	
 	public HashMap<String, Domaine> getCaracteristiques() {
 		return this.caracteristiques;
 	}
@@ -83,6 +87,7 @@ public class Categorie {
 	}
 
 	public String toString() {
+		int tab=1;
 		//nom de la catégorie
 		String str = "CATEGORIE: " + this.nom + "\n";
 
@@ -91,7 +96,31 @@ public class Categorie {
 			str += caracteristique.getValue().toString() + "\n";
 		//affiche chaque catégorie fille
 		for (Map.Entry<String, Categorie> fille : this.getFilles().entrySet())
-			str += fille.getValue().toString();
+			str += "\t" + fille.getValue().toString(tab);
+
+		return str;
+	}
+	
+	//affichage temporaire pour une lisibilit� propre
+	public String toString(int tab) {
+		String str = "";
+		//nom de la catégorie
+		for(int i =0; i<tab-1; i++)
+			str += "\t";
+		str += "CATEGORIE: " + this.nom + "\n";
+
+		//affiche chaque caractéristiques
+		for (Map.Entry<String, Domaine> caracteristique : this.getCaracteristiques().entrySet()) {
+			for(int i =0; i<tab; i++)
+				str += "\t";
+			str += caracteristique.getValue().toString() + "\n";
+		}
+		//affiche chaque catégorie fille
+		for (Map.Entry<String, Categorie> fille : this.getFilles().entrySet()) {
+			for(int i =0; i<tab; i++)
+				str += "\t";
+			str += fille.getValue().toString(tab+1);
+		}
 
 		return str;
 	}
