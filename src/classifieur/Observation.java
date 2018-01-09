@@ -6,6 +6,11 @@ public class Observation {
 	//Attribut
 	private HashMap<String,String> caracteristiquesObservees;
 	
+	//Constrcuteur
+	public Observation() {
+		this.caracteristiquesObservees = new HashMap<String,String>();
+	}
+	
 	//Constructeur de test
 	public Observation(HashMap<String,String> caracObs){
 		this.caracteristiquesObservees = caracObs;
@@ -28,5 +33,17 @@ public class Observation {
 			}else est_sous = false;
 		
 		return est_sous;
+	}
+	
+	public boolean trouveCaracteristique(String carac) {
+		boolean trouve = false;
+		for(Map.Entry<String,String> caracteristique : this.caracteristiquesObservees.entrySet())
+			if(carac.equalsIgnoreCase(caracteristique.getKey()))
+				trouve = true;
+		return trouve;
+	}
+	
+	public void ajoutCaracteristique(String nomCarac, String carac) {
+		caracteristiquesObservees.put(nomCarac, carac);
 	}
 }
