@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -20,6 +21,9 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.xml.sax.SAXException;
+
+import classifieur.Classifieur;
 import classifieur.Observation;
 
 /**
@@ -32,7 +36,7 @@ public class ihmCkoa extends JFrame {
 	static final int HTEXT = 10; // dimensions des zones de textes
 	static final int WTEXT = 30;
 	static final int HAUT = 800; // dimensions par defaut de de la frame
-	static final int LARG = 600;
+	static final int LARG = 800;
 	static final String FORMAT = ".png"; // format (.png, .png, .tiff, ...)
 
 	// CKOA
@@ -119,7 +123,7 @@ public class ihmCkoa extends JFrame {
 		}
 	}
 
-	//quand 
+	//quand l'utilisateur ajoute la caractéristique (touche entrée)
 	class InputListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -133,6 +137,7 @@ public class ihmCkoa extends JFrame {
 		}
 	}
 
+	//met à jour 
 	public void update() {
 		textObservation.append("\t- " + this.caracteristique + ": " + this.valeurCaracteristique);
 		textObservation.append("\n");
@@ -185,7 +190,7 @@ public class ihmCkoa extends JFrame {
 		}
 	}
 
-	public static void main(String argv[]) {
+	public static void main(String argv[]) throws SAXException, IOException, InterruptedException {
 		if (argv.length != 1) {
 			System.err.println("usage: java ihm.ProtoCkoa <fichier image> (sans extension)");
 		} else {
@@ -194,6 +199,11 @@ public class ihmCkoa extends JFrame {
 			ihm.pack();
 			ihm.setSize(LARG, HAUT);
 			ihm.setVisible(true);
+			
+			//Application
+			Classifieur classifieur = new Classifieur();
+			classifieur.loadXML("ressources/arbres/arbres");
+			classifieur.show("arbres2", "png");
 		}
 	}
 }

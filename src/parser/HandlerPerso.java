@@ -12,14 +12,14 @@ import classifieur.*;
 public class HandlerPerso implements ContentHandler {
 
 	//Variables du projet
-	private Classifieur classifieur;
+	private Categorie typologie;
 	private Categorie categCourante;
 	private HashMap<String, Domaine> mapCarac;//caractéristiques de la catégorie courante
 	private boolean mere;//définit si la catégorie courante est la mère afin de créer le classifieur dès que la mere est identifiée
 	private String nomMere;//nom de la mère de la catégorie courante
 	
-	public Classifieur getClassifieur() {
-		return classifieur;
+	public Categorie getTypologie() {
+		return typologie;
 	}
 	//
 	
@@ -77,12 +77,12 @@ public class HandlerPerso implements ContentHandler {
                 if (localName.equals("categorie")) {
                     System.out.println("end categorie.\n");
                     if(mere) {
-                    	classifieur = new Classifieur(new Categorie(categorieCourante, mapCarac));
+                    	typologie = new Categorie(categorieCourante, mapCarac);
                     	mere=false;
                     }
                     else {
                     	categCourante = new Categorie(categorieCourante, mapCarac);
-                    	ajoutCategorieAuClassifieur(classifieur.getTypologie(), categCourante);
+                    	ajoutCategorieAuClassifieur(typologie, categCourante);
                     }
                 }
                 else {
@@ -158,13 +158,12 @@ public class HandlerPerso implements ContentHandler {
     
     public boolean ajoutCategorieAuClassifieur(Categorie typo, Categorie categ) {
     	if(typo.getNom().equalsIgnoreCase(nomMere)) {
-    		this.getClassifieur().ajout_sous_categ(typo, categorieCourante, categ);
+    		typologie.ajout_sous_categ(categorieCourante, categ);
     		return true;
     	}
     	for (Map.Entry<String, Categorie> fille : typo.getFilles().entrySet()) {
-    		System.out.println(nomMere);
     		if(fille.getValue().getNom().equalsIgnoreCase(nomMere)) {
-    			this.getClassifieur().ajout_sous_categ(fille.getValue(), categorieCourante, categ);
+    			fille.getValue().ajout_sous_categ(categorieCourante, categ);
     			return true;
     		}
     		else {

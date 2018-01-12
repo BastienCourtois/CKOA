@@ -1,0 +1,10 @@
+diagraph G{
+arbre-> feuillu
+feuillu-> aulne
+feuillu-> hetre
+feuillu-> chene
+arbre-> conifere
+conifere-> epicea
+conifere-> thuya
+conifere-> meleze
+}

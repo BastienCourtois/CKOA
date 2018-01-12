@@ -15,6 +15,10 @@ public class Categorie {
 		this.nom = n;
 		this.caracteristiques = carac;
 	}
+	public Categorie() {
+		this.nom="";
+		this.caracteristiques = new HashMap<>();
+	}
 
 	// Accesseurs
 	public String getNom() {
@@ -142,4 +146,14 @@ public class Categorie {
 
 		return caracteristiques;
 	}
+
+	public String show() {
+		String str="";
+		for (Map.Entry<String, Categorie> fille : this.getFilles().entrySet()) {
+			str+= this.nom + "-> " + fille.getKey() + "\n";
+			str+= fille.getValue().show();
+		}
+		return str;
+	}
+	
 }

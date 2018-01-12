@@ -11,6 +11,7 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 import classifieur.Categorie;
+import classifieur.Classifieur;
 import classifieur.Domaine;
 
 /**
@@ -41,7 +42,8 @@ public class ParserExample {
             System.out.println("Categories: " + monHandler.getCategories());
             
             //recuperation du classifieur(donc simple catégorie mere et de toutes les sous catégories non triées
-            System.out.println("\n\n\n\nClassifieur : " + monHandler.getClassifieur());
+            System.out.println("\n\n\n\nClassifieur : " + monHandler.getTypologie());
+            
         }
     }
 }
