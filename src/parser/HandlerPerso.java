@@ -63,13 +63,14 @@ public class HandlerPerso implements ContentHandler {
     }
 
     public void endElement(String namespaceURI, String localName, String rawName) throws SAXException {
+    	//quand la balise intervalle se ferme
         if (localName.equals("intervalle")) {
             System.out.println("\t\tintervalle: [" + inf + ", " + sup + "]");
-            mapCarac.put(caracteristiqueCourante, new IntervalleNumerique("intervalle", inf, sup));
+            mapCarac.put(caracteristiqueCourante, new IntervalleNumerique(caracteristiqueCourante, inf, sup));
+            System.out.println(mapCarac);
         } else {
             if (localName.equals("caracteristique")) {
                 System.out.println("\tend caracteristique: " + this.caracteristiqueCourante + ".");
-                mapCarac.put(caracteristiqueCourante, new EnsembleDeChaine(caracteristiqueCourante, ensemble));
                 ensemble=new ArrayList<String>();
 
             } else {
@@ -94,8 +95,8 @@ public class HandlerPerso implements ContentHandler {
             }
         }
     }
+    
     //contenu characteres de l'element courant
-
     public void characters(char[] ch, int start, int length) throws SAXException {
         if (elementType != null) {
             if ((elementType.equals("docbase")) || (elementType.equals("categorie")) || (elementType.equals("caracteristique")) || (elementType.equals("intervalle")) || (elementType.equals("ensemble"))) {

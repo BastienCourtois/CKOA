@@ -1,10 +1,24 @@
 package ihm;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.Observable;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.MediaTracker;
+import java.awt.ScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import classifieur.Observation;
 
@@ -97,6 +111,7 @@ public class ihmCkoa extends JFrame {
 
 	}
 
+	//quand l'utilisateur à choyé de la caractéristique
 	class SelectListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -104,6 +119,7 @@ public class ihmCkoa extends JFrame {
 		}
 	}
 
+	//quand 
 	class InputListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -130,6 +146,7 @@ public class ihmCkoa extends JFrame {
 			valeurCaracteristique = "";
 			saisieCaracteristique.setText("");
 			textObservation.setText("OBSERVATION:\n");
+			obs = new Observation();
 		}
 	}
 
